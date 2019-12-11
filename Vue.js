@@ -1,9 +1,9 @@
-import {compile} from './compile'
-import {observe} from './observe'
-import {proxy} from "./proxy"
-import {getData} from "./utils/get_data"
+import Compile from './compile.js'
+import {observe} from './observe.js'
+import {proxy} from "./proxy.js"
+import {getData} from "./utils/get_data.js"
 
-function Vue (options){
+export default function Vue (options){
   this.$options = options
   this.$el = options.el
   this.$data = getData(this, options.data)
@@ -15,5 +15,5 @@ function Vue (options){
   proxy(this, this.$data)
 
   // 编译模板进行依赖收集
-  compile(this.$el)
+  new Compile(this, this.$el)
 }

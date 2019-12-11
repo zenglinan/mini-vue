@@ -1,4 +1,4 @@
-import {isPlainObject} from "./type_assert";
+import {isPlainObject} from "./type_assert.js";
 
 export function getData(vm, data){
   if(isPlainObject(data)){

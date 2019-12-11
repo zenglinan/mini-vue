@@ -1,25 +1,28 @@
-import {isPlainObject, isArray} from "./utils/type_assert";
+import {isPlainObject, isArray} from "./utils/type_assert.js";
+import Dep from './Dep.js'
 
 export function observe(data){
-  if(!isPlainObject(data) && isArray(data)) return
+  if(!isPlainObject(data) && !isArray(data)) return
 
   if(isArray(data)){
     defineArrayReactive(data)
   } else if(isPlainObject(data)){
     Object.keys(data).forEach(k => {
-      defineObjectReactive(data, k)
+      defineObjectReactive(data, k, data[k])
     })
   }
 }
 
-function defineObjectReactive(obj, key){
-  if(isPlainObject(obj[key])) observe(obj[key]) // 递归调用，observer 所有属性
+function defineObjectReactive(obj, key, val){
+  if(isPlainObject(val)) observe(val) // 递归调用，observer 所有属性
 
+  const dep = new Dep() // 每个属性对应一个 dep 对象，用于管理观察者 watcher
   Object.defineProperty(obj, key, {
     configurable: true,
     enumerable: true,
     get(){
-      return obj[key]
+      Dep.target && dep.add(Dep.target) // 将最新的 watcher 添加进这个属性的 dep 中
+      return val
     },
     set(newVal){
       if(obj[key] === newVal){
