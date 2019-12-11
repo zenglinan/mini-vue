@@ -15,7 +15,7 @@ export function isElement(node){  // dom 元素
 }
 
 export function isInterpolation(node){  // 插值表达式
-  return node.nodeType === 3 && /\{\{.*\}\}/.test(node.textContent)
+  return node.nodeType === 3 && /(\{\{\s*(.)*\s*\}\})/.test(node.textContent)
 }
 
 export function isDirective(attr){  // v- 指令

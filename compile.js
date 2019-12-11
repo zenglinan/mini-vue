@@ -1,5 +1,4 @@
 import { isString, isElement, isInterpolation, isDirective } from "./utils/type_assert.js"
-import { getOuterHtml } from './utils/get_outerhtml.js'
 import {directives} from './directives.js'
 import { Watcher } from './Watcher.js'
 
@@ -23,7 +22,7 @@ class Compile{
         this.compileInterpolation(node)
       }
   
-      if(node.childNodes.length && node.childNodes.length > 2){ // 递归遍历
+      if(node.childNodes && node.childNodes.length > 0){ // 递归遍历
         this.compileTemp(node)
       }
     })
@@ -40,14 +39,18 @@ class Compile{
 
         if(handler){
           handler(this.$vm, el, exp)
-          // this.$vm[exp] && new Watcher(this.$vm, exp)
         }
       }
     })
   }
 
-  compileInterpolation(){
-
+  compileInterpolation(node){
+    const interpolation = node.textContent.match(/(\{\{\s*(.*)\s*\}\})/)[2] // 插值的内容
+    if(this.$vm[interpolation]){  // 插值是实例数据
+      node.textContent = this.$vm[interpolation]
+    } else {  // 插值是 JS 表达式
+      node.textContent = eval(interpolation)
+    }
   }
 }
 
