@@ -25,15 +25,14 @@ function defineObjectReactive(obj, key, val){
       return val
     },
     set(newVal){
-      if(obj[key] === newVal){
+      if(val === newVal){
         return
       }
       // 如果新值是 对象/数组 也要对其进行响应式定义
       if(isPlainObject(newVal) || isArray(newVal)){
         observe(newVal)
       }
-      // update()
-      obj[key] = newVal
+      val = newVal  // 这里注意不能用 obj[key] = newVal 会造成循环调用
     }
   })
 }
