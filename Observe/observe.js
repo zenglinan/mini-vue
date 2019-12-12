@@ -1,4 +1,4 @@
-import {isPlainObject, isArray} from "./utils/type_assert.js";
+import {isPlainObject, isArray} from "../utils/type_assert.js";
 import Dep from './Dep.js'
 
 export function observe(data){

@@ -1,6 +1,6 @@
-import { isString, isElement, isInterpolation, isDirective } from "./utils/type_assert.js"
-import {directives} from './directives.js'
-import { Watcher } from './Watcher.js'
+import { isString, isElement, isInterpolation, isDirective } from "../utils/type_assert.js"
+import {directives} from '../directives.js'
+import { Watcher } from '../Observe/Watcher.js'
 
 class Compile{
   constructor(vm, el){

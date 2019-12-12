@@ -1,6 +1,6 @@
-import Compile from './compile.js'
-import {observe} from './observe.js'
-import {proxy} from "./proxy.js"
+import Compile from './Compile/compile.js'
+import {observe} from './Observe/observe.js'
+import {proxy} from "./Observe/proxy.js"
 import {getData} from "./utils/get_data.js"
 
 export default function Vue (options){

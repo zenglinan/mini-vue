@@ -1,4 +1,4 @@
-import {Watcher} from './Watcher.js'
+import {Watcher} from './Observe/Watcher.js'
 
 // 存放指令函数
 
