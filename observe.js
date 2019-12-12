@@ -33,6 +33,7 @@ function defineObjectReactive(obj, key, val){
         observe(newVal)
       }
       val = newVal  // 这里注意不能用 obj[key] = newVal 会造成循环调用
+      dep.notify()  // 由于形成了闭包，此作用域内依然可以持有上面定义的 dep 的引用
     }
   })
 }

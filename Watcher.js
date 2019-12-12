@@ -10,6 +10,6 @@ export class Watcher {
   }
 
   update(){
-
+    this.cb()
   }
 }

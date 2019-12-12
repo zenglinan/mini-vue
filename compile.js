@@ -33,8 +33,8 @@ class Compile{
     const attrs = el.attributes
     Array.from(attrs).map(attr => {
       if(isDirective(attr.name)){
-        const exp = attr.value
-        const dir = attr.name.slice(2)
+        const exp = attr.value  // 属性值
+        const dir = attr.name.slice(2)  // 指令名
         const handler = directives[`${dir}Updater`] // 获取对应的指令函数
 
         if(handler){
@@ -47,6 +47,9 @@ class Compile{
   compileInterpolation(node){
     const interpolation = node.textContent.match(/(\{\{\s*(.*)\s*\}\})/)[2] // 插值的内容
     if(this.$vm[interpolation]){  // 插值是实例数据
+      new Watcher(this.$vm, interpolation, ()=>{
+        node.textContent = this.$vm[interpolation]
+      })
       node.textContent = this.$vm[interpolation]
     } else {  // 插值是 JS 表达式
       node.textContent = eval(interpolation)
