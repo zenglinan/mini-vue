@@ -1,5 +1,5 @@
 # Mini Vue
-## Vue
+> Vue
 ### 实现功能
 1. 实现响应式数据（支持对象、数组）
 2. 插值表达式
@@ -7,9 +7,10 @@
 - v-text
 - v-model
 
-## Vuex
+> Vuex
 ### 实现功能
 1. state
 2. getters
 3. mutations
 4. actions
+5. modules
