@@ -22,3 +22,6 @@
 - mutations
 - actions
 - modules
+
+#### 实现思路
+[手把手讲解：Vuex 剖析与简单实现](https://github.com/zenglinan/blog/issues/39)
